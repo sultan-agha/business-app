@@ -10,7 +10,9 @@ Browse categories of businesses.
 
 View popular businesses.
 
-Explore more businesses with the "Explore More" feature.
+Explore more businesses with the "Explore More" feature(where u can search for a specific business).
+
+Add your favorite business to your favorites.
 
 🔒 User Authentication:
 
