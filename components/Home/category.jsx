@@ -51,10 +51,6 @@ export default function Category({explore = false,onCategorySelect}) {
             }}>
         Category
       </Text> 
-      <Text style={{
-        fontFamily:'outfit-medium',
-        color:Colors.Primary
-      }}>View all</Text>
         </View>}
         <FlatList
         data={categoryList}

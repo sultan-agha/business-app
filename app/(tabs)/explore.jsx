@@ -9,16 +9,43 @@ import ExploreBusinessList from '../../components/Explore/ExploreBusinessList'
 export default function explore() {
   //to get the business list according to category
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [businessList,setBusinessList]=useState([])
-  const GetBusinessByCategory=async(category)=>{
-    setBusinessList([]);
-    const q=query(collection(db,'BusinessList'),where('category','==',category))
-    const querySnapshot=await getDocs(q)
-    querySnapshot.forEach((doc)=>{
-      console.log(doc.data())
-      setBusinessList(prev=>[...prev,{id:doc.id,...doc.data()}])
-    })
-  }
+
+   // Function to get business list according to category and search term
+  const GetBusinessByCategory = async (category) => {
+    setBusinessList([]); // Clear the previous list
+    setSelectedCategory(category); // Track the selected category
+
+    let q = query(collection(db, 'BusinessList'), where('category', '==', category));
+
+    // If a search term is provided, add a 'where' clause to filter by business name
+    if (searchTerm.trim() !== '') {
+      q = query(
+        collection(db, 'BusinessList'),
+        where('category', '==', category),
+        where('name', '>=', searchTerm),
+        where('name', '<=', searchTerm + '\uf8ff') // Search for name starting with the searchTerm
+      );
+    }
+
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      setBusinessList((prev) => [...prev, { id: doc.id, ...doc.data() }]);
+    });
+  };
+
+  // Function to update the search term and trigger a new search
+  const handleSearch = (text) => {
+    setSearchTerm(text); // Update the search term state
+
+    // If there is a category selected, search businesses within that category
+    if (selectedCategory) {
+      GetBusinessByCategory(selectedCategory);
+    }
+  };
+
   return (
     <View style={{
       padding:20
@@ -45,6 +72,8 @@ export default function explore() {
         }}>
             <Ionicons name='search' size={24} color={Colors.Primary}/>
             <TextInput placeholder='Search...'
+             value={searchTerm} // Controlled input
+             onChangeText={handleSearch} // Trigger search on text input   
             style={{
                 fontFamily:'outfit',
                 fontSize:16

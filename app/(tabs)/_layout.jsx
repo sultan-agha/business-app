@@ -35,6 +35,15 @@ export default function TabLayout() {
             tabBarActiveTintColor:Colors.Primary
         }}
         />
+        <Tabs.Screen name='favorite'
+        options={{
+            tabBarLabel:'Favorite',
+            tabBarIcon:({color})=>
+                <Ionicons name='star-outline'
+            size={24} color={color}/>,
+            tabBarActiveTintColor:Colors.Primary
+        }}
+        />
     </Tabs>
   )
 }

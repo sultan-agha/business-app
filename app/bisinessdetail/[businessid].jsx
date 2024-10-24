@@ -1,7 +1,7 @@
 import { View, Text, ActivityIndicator, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { useLocalSearchParams } from 'expo-router'
-import { collection, doc, getDoc, query } from 'firebase/firestore';
+import { collection,setDoc, doc, getDoc, query } from 'firebase/firestore';
 import { db } from '../../config/FirebaseConfig';
 import { Colors } from '../../constants/Colors';
 import Intro from '../../components/BusinessDetail/Intro';

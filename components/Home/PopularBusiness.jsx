@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Colors } from '../../constants/Colors'
 import { collection, getDocs, limit, query } from 'firebase/firestore'
@@ -6,8 +6,9 @@ import { db } from '../../config/FirebaseConfig'
 import PopularBusinessCard from './PopularBusinessCard'
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
+import {useRouter } from 'expo-router'
 export default function PopularBusiness() {
-
+  const router= useRouter();
   useFocusEffect(
     useCallback(() => {
       GetBusinessList();
@@ -41,10 +42,12 @@ export default function PopularBusiness() {
         }}>
     Popular Business
   </Text> 
+  <TouchableOpacity onPress={()=>router.push('/business/all-business')}>
   <Text style={{
     fontFamily:'outfit-medium',
     color:Colors.Primary
   }}>View all</Text>
+</TouchableOpacity>
     </View> 
     <FlatList
     data={bussinessList}

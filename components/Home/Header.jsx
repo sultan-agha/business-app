@@ -38,7 +38,7 @@ export default function Header() {
         </View>
       </View>
        {/* searchbar */}
-       <View style ={{
+       {/* <View style ={{
             display:'flex',
             flexDirection:'row',
             gap:10,
@@ -56,7 +56,7 @@ export default function Header() {
                 fontSize:16
             }}
             />
-        </View>
+        </View> */}
     </View>
   )
 }
